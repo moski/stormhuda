@@ -1,0 +1,11 @@
+redis:
+  counter:
+    key: 'global_counter'
+    channel: 'update_stream'
+    update_message: 'update_counter'
+  tweets:
+    key: 'tweets_list'
+    max_count: 99
+  pubsub:
+    channel: 'realtime'
+    tweet_channel: "tweets_realtime"
