@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>عاصفة هدى</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Arabic Boostrap -->
+  <!-- Optional theme -->
+
+  <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/mustache.min.js"></script>
+
+  <link rel="stylesheet" href="http://www.justinaguilar.com/animations/css/animations.css" />
+  <link rel="stylesheet" href="/css/huda.css" />
+  
+  <style>
+  </style>
+</head>
+
+<body class="home" style="background-color: #EBECED;">
+  <div id="container-wrapper">
+    <div class="container timeline classic">
+      <p class="welcome">
+        <strong>أهلاً بموقع عاصفة هدى</strong><br>
+        إستمتع بأحدث صور العاصفه على مواقع التواصل الإجتماعي
+      </p>
+      
+      <div class="wrapper-content">
+        <div class="content">
+          <ol class="stream" id="stream">
+          </ol>
+          <input type="hidden" id="next" name="next" value="<%= next %>">
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="js/app.js"></script>
+  <script>
+  $(document).ready(function () {
+    $.get("/views/card1.tpl.html", function (data) {
+       card_tpl = data;
+       var fac_posts = post_factory(<%- JSON.stringify(posts) %>);
+       render_new_posts(fac_posts);
+       init_scroll();
+    });
+  });
+  </script>
+</body>
+
+</html>

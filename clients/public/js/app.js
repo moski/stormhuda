@@ -1,11 +1,45 @@
    var card_tpl = "";
    var unviewed_posts = [];
-
+   
+   
+   var post_factory = function(posts){
+     var res = []
+     for (var i = 0; i < posts.length; i++) {
+       var post_unified = {
+          "title": "",
+          "body": posts[i].title,
+          "img": posts[i].medias[0],
+          "id": posts[i].id,
+          "source": posts[i].service_uri,
+          "type": posts[i].type
+       }
+       res.push(post_unified)
+     }
+     return res;
+   }
+   
+   var render_new_posts = function(posts, append){
+     console.log("rendering new_posts: ", posts.length);
+     var len = posts.length;
+     for (var i = 0; i < len; i++) {
+        var post = posts.shift();
+        console.log(card_tpl);
+        var rendered = Mustache.render(card_tpl, post);
+        if(append){
+          $("#stream").append(rendered);
+        }else{
+          $("#stream").prepend(rendered);
+        }
+        
+     }
+   }
+   
+   
    var show_new = function (e) {
       var len = unviewed_posts.length;
       for (var i = 0; i < len; i++) {
          var post = unviewed_posts.shift();
-         console.log(unviewed_posts.length);
+         console.log(post);
          var rendered = Mustache.render(card_tpl, post);
          $("#cards").prepend(rendered);
          $("#new_posts_counter").html(unviewed_posts.length);
@@ -48,32 +82,46 @@
          }
          unviewed_posts.push(post_unified);
          $("#new_posts_counter").html(unviewed_posts.length);
-
+         render_new_posts(unviewed_posts);
       });
    }
+   
+   
+   function element_in_scroll(elem){
+       var docViewTop = $(window).scrollTop();
+       var docViewBottom = docViewTop + $(window).height();
+ 
+       var elemTop = $(elem).offset().top;
+       var elemBottom = elemTop + $(elem).height();
+ 
+       return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+   }
+   
+   function init_scroll(){
+     $(document).scroll(function(e){
+         if (element_in_scroll("ol#stream li:last")) {
+                 $(document).unbind('scroll');
+                 $.ajax({
+                     type: "GET",
+                     url: document.location.href,
+                     data: { start :$('#next').attr('value'), json: "true" }
+                 }).done(function( data ) {
+                   console.log(data);
+                     $('#next').attr('value',data.next);
+                     fac_data = post_factory(data.posts);
+                     render_new_posts(fac_data, true)
+                     if (data.next.length != 0) {
+                       init_scroll();
+                     }
+                 });
+             };
+     });
+   }
+   
+   
+   
+   
+   
+   
+   
 
-   $(document).ready(function () {
-      // Fetch card template
-
-      $.get("/views/card.tpl.html", function (data) {
-         card_tpl = data;
-      });
-
-
-
-
-      /*
-      setInterval(function () {
-         var cards = $(".cards");
-
-         if (cards.length > 200) {
-            //Remove earliest 100 blocks to keep the page from hanging
-            for (var i = cards.length - 1; i >= 0; i--) {
-               $(cards[i]).remove();
-            }
-         }
-      }, 5000); // each 5 mins
-*/
-
-
-   })

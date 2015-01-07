@@ -59,6 +59,13 @@ var allPostsListner = new RedisListener(
 )
 allPostsListner.emitNewMessagesTo(io.sockets);
 
+
+var client = redis.createClient();
+client.select(13, function() {});
+
+
+app.set('redis', client);
+
 io.sockets.on('connection', function (socket) {
   socket.on("subscribe", function (data_type) {
     socket.join(data_type);

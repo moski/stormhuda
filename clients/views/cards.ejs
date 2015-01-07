@@ -207,6 +207,12 @@
       });
 
     });
+    
+    $(document).ready(function () {
+      $.get("/views/card.tpl.html", function (data) {
+         card_tpl = data;
+       });
+     });
   </script>
 
 </body>
