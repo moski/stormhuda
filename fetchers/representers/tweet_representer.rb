@@ -9,4 +9,5 @@ module TweetRepresenter
   property :urls
   property :service_uri
   property :type
+  property :created_at
 end
