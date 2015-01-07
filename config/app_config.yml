@@ -1,11 +1,23 @@
 redis:
-  counter:
-    key: 'global_counter'
-    channel: 'update_stream'
-    update_message: 'update_counter'
+  host: localhost
+  port: 6379
+  namespace: huda
+  db: 13
+
+redis_keys:
+  global:
+    key: 'global_list'
+    counter: 'global_counter'
+    pubsub:
+      list: 'pubsub_global_list'
+      counter: 'pubsub_global_counter'
   tweets:
     key: 'tweets_list'
-    max_count: 99
+    counter: 'tweets_counter'
+    pubsub:
+      list: 'pubsub_tweets_list'
+      counter: 'pubsub_tweets_counter'
+    #max_count: 99
   pubsub:
     channel: 'realtime'
     tweet_channel: "tweets_realtime"

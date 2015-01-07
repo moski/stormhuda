@@ -12,8 +12,19 @@ GEM
     json (1.8.1)
     memoizable (0.4.2)
       thread_safe (~> 0.3, >= 0.3.1)
+    mini_portile (0.6.2)
+    multi_json (1.10.1)
     multipart-post (2.0.0)
     naught (1.0.0)
+    nokogiri (1.6.5)
+      mini_portile (~> 0.6.0)
+    redis (3.2.0)
+    representable (2.1.3)
+      multi_json
+      nokogiri
+      uber (~> 0.0.7)
+    roar (1.0.0)
+      representable (>= 2.0.1, <= 3.0.0)
     simple_oauth (0.3.1)
     thread_safe (0.3.4)
     twitter (5.13.0)
@@ -27,9 +38,12 @@ GEM
       memoizable (~> 0.4.0)
       naught (~> 1.0)
       simple_oauth (~> 0.3.0)
+    uber (0.0.12)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  redis
+  roar
   twitter
