@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Timeline - Bootsnipp.com</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Arabic Boostrap -->
+  <link rel="stylesheet" href="/css/bootstrap.css" />
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="/css/bootstrap-theme.min.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+
+  <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/mustache.min.js"></script>
+
+  <link rel="stylesheet" href="http://www.justinaguilar.com/animations/css/animations.css" />
+
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="row">
+      <div class="col-md-3 sidebar">
+        <div class="navbar" role="navigation">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#rebound-navbar-collapse"><span class="fa fa-bars"></span> Menu</button>
+            <a href="index.html" class="navbar-brand">Rebound</a>
+            <p class="brand-text">Responsive Portfolio Theme for Bootstrap.</p>
+          </div>
+          <!-- end navbar-header -->
+          <div class="collapse navbar-collapse" id="rebound-navbar-collapse">
+            <ul class="nav navbar-nav">
+              <li class="title">Menu</li>
+              <li class="active"><a href="index.html">Home</a>
+              </li>
+              <li><a href="about.html">About</a>
+              </li>
+              <li><a href="hire.html">Hire Me</a>
+              </li>
+              <li><a href="blog-parent.html">Blog</a>
+              </li>
+              <li><a href="contact.html">Contact</a>
+              </li>
+              <li><a href="elements.html">UI Elements</a>
+              </li>
+              <li><a href="forms.html">Form Elements</a>
+              </li>
+              <li><a href="typography.html">Tables &amp; Typography</a>
+              </li>
+            </ul>
+            <form class="navbar-form" role="search">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search" value="" />
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button"><span class="fa fa-search"></span>
+                </button>
+                </span>
+              </div>
+              <!-- end input group -->
+            </form>
+            <!-- end navbar-form -->
+            <ul class="nav navbar-nav filter-portfolio">
+              <li class="title">Work</li>
+              <li class="active"><a href="#none" data-filter="*">All</a>  <span>(123)</span>
+              </li>
+              <li><a href="#none" data-filter=".film">Film</a>  <span>(9)</span>
+              </li>
+              <li><a href="#none" data-filter=".music">Music</a>  <span>(22)</span>
+              </li>
+              <li><a href="#none" data-filter=".art">Art</a>  <span>(7)</span>
+              </li>
+              <li><a href="#none" data-filter=".social">Social</a>  <span>(49)</span>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav nav-social hidden-sm hidden-xs">
+              <li class="title">Social</li>
+              <li><a href="#none">Twitter</a>
+              </li>
+              <li><a href="#none">Facebook</a>
+              </li>
+              <li><a href="#none">LinkedIn</a>
+              </li>
+              <li><a href="#none">Dribbble</a>
+              </li>
+            </ul>
+          </div>
+          <!-- end navbar-collapse -->
+        </div>
+        <!-- end navbar -->
+      </div>
+      <!-- end col -->
+      <div class="col-md-9 content" >
+        <div class="row"   >
+          <div class="col-md-12 fadeIn" style="display:none" id="new_posts">
+            <a href onclick="return show_new(event)">
+            <span id="new_posts_counter">0</span>
+            منشورات جديدة
+            </a>
+          </div>
+        </div>
+        <div class="portfolio-wrapper" id="cards">
+
+        </div>
+        <!-- end portfolio-wrapper -->
+        <div class="pagination-wrapper">
+          <ul class="pagination">
+            <li class="disabled"><span>Prev</span>
+            </li>
+            <li class="active"><a href="#none">1</a>
+            </li>
+            <li><a href="#none">2</a>
+            </li>
+            <li><a href="#none">3</a>
+            </li>
+            <li><a href="#none">4</a>
+            </li>
+            <li><a href="#none">5</a>
+            </li>
+            <li><a href="#none">Next</a>
+            </li>
+          </ul>
+        </div>
+        <!-- end pagination-wrapper -->
+      </div>
+      <!-- end col -->
+    </div>
+    <!-- end row -->
+  </div>
+  <!-- end wrapper -->
+
+  <footer class="hidden-xs">
+    <p class="pull-left">&copy; Copyright 2014. Rebound.</p>
+    <p class="pull-right"><a href="#none">Rebound</a> by Pukeko Design Studio. <a href="documentation.html">Documentation</a>.</p>
+  </footer>
+
+  <!-- Le javascript
+    ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="js/app.js"></script>
+
+  <script src="js/rebound.js"></script>
+  <script src="js/jquery.isotope.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+
+      $('.dropdown-toggle').dropdown();
+
+      var $container = $('.portfolio-wrapper');
+
+      $container.imagesLoaded(function () {
+        $container.isotope({
+          itemSelector: '.card',
+          layoutMode: 'fitRows'
+        });
+      });
+
+      // Needed functions
+      var getColWidth = function () {
+        var width,
+          windowWidth = $(window).width();
+        if (windowWidth <= 480) {
+          width = Math.floor($container.width());
+        } else if (windowWidth <= 768) {
+          width = Math.floor($container.width());
+        } else {
+          width = Math.floor(250);
+        }
+        return width;
+      }
+
+      function setWidths() {
+        var colWidth = getColWidth();
+        $container.children().css({
+          width: colWidth
+        });
+      }
+
+
+      $(window).smartresize(function () {
+        setWidths();
+        $container.isotope({
+          masonry: {
+            columnWidth: getColWidth()
+          }
+        });
+      });
+
+      $('.filter-portfolio li a').click(function () {
+        $('.filter-portfolio li.active').removeClass('active');
+        $(this).parent('li').addClass('active');
+        var selector = $(this).attr('data-filter');
+        $container.isotope({
+          filter: selector,
+          masonry: {}
+        });
+        return false;
+      });
+      // update columnWidth on window resize
+      $(window).smartresize(function () {
+        $container.isotope({
+          // update columnWidth to a percentage of container width
+          masonry: {}
+        });
+      });
+
+    });
+  </script>
+
+</body>
+
+</html>

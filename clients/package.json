@@ -1,0 +1,43 @@
+{
+  "name": "stormhuda-client",
+  "version": "0.0.1",
+  "description": "A Nodejs client that listens to Storm Hude Social Posts ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/moski/stormhuda"
+  },
+  "keywords": [
+    "storm",
+    "huda",
+    "live",
+    "posts",
+    "realtime"
+  ],
+  "author": ["Mutaz Salahat" , "Moski Doski"],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/moski/stormhuda/issues"
+  },
+  "dependencies": {
+    "express": "~4.0.0",
+    "morgan": "~1.0.0",
+    "body-parser": "~1.0.0",
+    "method-override": "~1.0.0",
+    "socket.io": "latest",
+    "redis": "latest",
+    "ejs": "latest",
+    "yamljs":"latest"
+  },
+  "devDependencies": {
+    "browserify": "~6.0.3",
+    "nodemon": "^1.2.1",
+    "reactify": "~0.14.0",
+    "uglify-js": "~2.4.15",
+    "watchify": "~2.0.0"
+  },
+  "homepage": "https://github.com/moski/stormhuda"
+}
