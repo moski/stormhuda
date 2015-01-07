@@ -11,7 +11,8 @@
           "img": posts[i].medias[0],
           "id": posts[i].id,
           "source": posts[i].service_uri,
-          "type": posts[i].type
+          "type": posts[i].type,
+         "username": posts[i].username
        }
        res.push(post_unified)
      }
@@ -78,7 +79,8 @@
             "img": post.medias[0],
             "id": post.id,
             "source": post.service_uri,
-            "type": post.type
+            "type": post.type,
+            "username": post.username
          }
          unviewed_posts.push(post_unified);
          $("#new_posts_counter").html(unviewed_posts.length);
