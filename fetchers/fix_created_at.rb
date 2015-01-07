@@ -29,17 +29,9 @@ $redis = Redis.new(
   port: app_config["redis"]["port"], 
   db: app_config["redis"]["db"])
 
-  puts app_config['redis_keys']['tweets']['key']
 
-tweets = $redis.lrange(app_config['redis_keys']['tweets']['key'], 0, -1)
+#tweets = $redis.lrange(app_config['redis_keys']['tweets']['key'], 0, -1)
 
 # Reset the list
 $redis.ltrim(app_config['redis_keys']['tweets']['key'], 0, -1)
 $redis.ltrim(app_config['redis_keys']['global']['key'], 0, -1)
-
-tweets.each do |x|
-  tweet = JSON.parse(x)
-  tweet['created_at'] = client.status(tweet["id"]).created_at.to_i
-  $redis.lpush app_config['redis_keys']['tweets']['key'], tweet.to_json
-  $redis.lpush app_config['redis_keys']['global']['key'], tweet.to_json
-end
