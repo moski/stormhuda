@@ -1,4 +1,39 @@
-require 'twitter'
+require 'bundler/setup'
+Bundler.require(:default)
+require 'yaml'
+require 'json'
+
+require_relative 'representers/tweet_representer'
+
+require_relative 'pubsub'
+
+# Load the twitter OAUTH creds
+twitter_config = YAML.load_file('../config/keys_config.yml')['twitter']
+
+# Load app configuration such as redis information and 
+# hashtags
+app_config = YAML.load_file('../config/app_config.yml')
+
+# Initialize the Client.
+client = Twitter::Streaming::Client.new do |config|
+  config.consumer_key        = twitter_config['consumer_key']
+  config.consumer_secret     = twitter_config['consumer_secret']
+  config.access_token        = twitter_config['access_token']
+  config.access_token_secret = twitter_config['access_token_secret']
+end
+
+pubsub = PubSub.new
 
 
-puts "i am here"
+
+
+topics = app_config["hashtags"]["twitter"]
+topics.map! {|x| x.strip}
+puts topics.inspect
+
+client.filter(track: topics.join(",")) do |tweet|
+  if tweet.is_a?(Twitter::Tweet)
+    tweet = TweetRepresenter.new(tweet)
+    puts tweet.to_json
+  end
+end

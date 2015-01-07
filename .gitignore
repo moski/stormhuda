@@ -1,0 +1,12 @@
+*.gem
+*~
+.bundle
+.rvmrc
+.yardoc
+Gemfile.lock
+coverage/*
+doc/*
+log/*
+measurement/*
+pkg/*
+config/keys_config.yml

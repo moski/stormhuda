@@ -9,3 +9,7 @@ redis:
   pubsub:
     channel: 'realtime'
     tweet_channel: "tweets_realtime"
+
+hashtags:
+  twitter:
+    - "العاصفة_هدى"
