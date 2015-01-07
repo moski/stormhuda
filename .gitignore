@@ -10,3 +10,4 @@ log/*
 measurement/*
 pkg/*
 config/keys_config.yml
+.DS_Stroe
