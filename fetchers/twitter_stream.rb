@@ -36,8 +36,11 @@ $redis = Redis.new(
 
 client.filter(track: topics.join(",")) do |tweet|
   if tweet.is_a?(Twitter::Tweet)
-    x = Storage::Tweet.new.extend(TweetRepresenter).from_json(tweet.to_json)
-    x.save!($redis)
+    # only fetch tweets with images.
+    if tweet.media?
+      x = Storage::Tweet.new.extend(TweetRepresenter).from_json(tweet.to_json)
+      x.save!($redis)
+    end
     print '.'
   end
 end
