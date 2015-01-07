@@ -22,15 +22,6 @@ client = Twitter::Streaming::Client.new do |config|
   config.access_token        = twitter_config['access_token']
   config.access_token_secret = twitter_config['access_token_secret']
 end
-=begin
-client = Twitter::Streaming::Client.new do |config|
-  config.consumer_key        = twitter_config['consumer_key']
-  config.consumer_secret     = twitter_config['consumer_secret']
-  config.access_token        = twitter_config['access_token']
-  config.access_token_secret = twitter_config['access_token_secret']
-end
-=end
-
 
 topics = app_config["hashtags"]["twitter"]
 topics.map! {|x| x.strip}
