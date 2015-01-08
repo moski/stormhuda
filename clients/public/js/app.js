@@ -56,7 +56,8 @@ var App = function (host, port, type) {
    "img": post.medias ? post.medias[0] : "",
    "id": post.id,
    "source": post.service_uri,
-   "type": post.type
+   "type": post.type,
+   "username": posts[i].username
   }
 
   return parsed_post;
