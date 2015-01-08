@@ -57,7 +57,7 @@ var App = function (host, port, type) {
    "id": post.id,
    "source": post.service_uri,
    "type": post.type,
-   "username": posts[i].username
+   "username": post.username
   }
 
   return parsed_post;
