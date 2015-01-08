@@ -50,7 +50,7 @@ var App = function (host, port, type) {
   var parsed_post = {
    "title": "",
    "body": post.title,
-   "img": post.medias[0],
+   "img": post.medias ? post.medias[0] : "",
    "id": post.id,
    "source": post.service_uri,
    "type": post.type
@@ -150,8 +150,8 @@ var App = function (host, port, type) {
       "source": post.service_uri,
       "type": post.type
      }
-     this.unviewedPosts.push(post_unified);
-     $("#new_posts_counter").html(this.unviewedPosts.length);
+     $this.unviewedPosts.push(post_unified);
+     $("#new_posts_counter").html($this.unviewedPosts.length);
     });
    });
 

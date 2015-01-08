@@ -39,7 +39,6 @@ app.set("twitter_config", {
   "type": "tweets"
 });
 
-app.set("port", config.app.port);
 
 app.set('view engine', 'ejs');
 
@@ -59,8 +58,11 @@ var IndexCtrl = require("./controllers/index");
 
 app.get('/:type?/:start?/:count?/:output_type?', IndexCtrl.get);
 
+app.listen(app.get("app_config")['port']);
+console.log("Express is working in port" , app.get("app_config")['port']);
 
-var io = require('socket.io').listen(app.listen(app.get("app_config")['port']));
+console.log("Socket.io is working in port" , app.get("app_config")['socket_port']);
+var io = require('socket.io').listen(app.get("app_config")['socket_port']);
 
 var RedisListener = require("./modules/RedisListener.js");
 
@@ -89,4 +91,7 @@ io.sockets.on('connection', function (socket) {
   });
 
 });
+
+
+
 
