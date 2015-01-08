@@ -34,7 +34,8 @@ var IndexCtrl = {
           port: res.appSettings['app_config']['socket_port'],
           posts: parsed_posts,
           pageIndex : start,
-          itemsCount : count
+          itemsCount : count,
+          env : res.appSettings['evn']
         });
       }
     });

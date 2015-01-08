@@ -13,7 +13,11 @@
 
   <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
   <script src="/js/bootstrap.min.js"></script>
+  <% if(env != 'production') { %>
+  <script src="http://<%= host %>:<%= port %>/socket.io/socket.io.js"></script>
+  <% } else { %>
   <script src="/socket.io/socket.io.js"></script>
+  <% } %>
   <script src="/js/mustache.min.js"></script>
 
   <link rel="stylesheet" href="http://www.justinaguilar.com/animations/css/animations.css" />
