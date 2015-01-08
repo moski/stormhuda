@@ -104,6 +104,13 @@ var App = function (host, port, type) {
      render_archived_card(post);
     }
    }
+   if (ga) {
+    ga('send', 'pageview', {
+     'page': '/' + $this.type,
+     'title': 'More of Type ' + $this.type
+    });
+   }
+
   });
   return false;
  }
