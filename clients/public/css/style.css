@@ -1,6 +1,5 @@
 @import url(http://fonts.googleapis.com/earlyaccess/amiri.css);
 
-
 /***************************************************
   COLOURS
 ****************************************************/
@@ -46,7 +45,7 @@ body {
 
 body {
   font-family: 'Amiri', tahoma;
-  background:  #efefef;
+  background: #efefef;
   color: #555;
 }
 a {
@@ -2687,7 +2686,11 @@ footer p {
   color: #fff;
   float: right;
 }
-
-.stButton .st-twitter-counter, .stButton .st-facebook-counter{
-  height:30px !important;
+.stButton .st-twitter-counter,
+.stButton .st-facebook-counter {
+  height: 30px !important;
+}
+.navbar .brand-text {
+  text-align: right !important;
+  margin-top: 10px !important;
 }
