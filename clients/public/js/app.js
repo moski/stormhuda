@@ -6,20 +6,21 @@ var App = function (host, port, type) {
  this.count = 20;
  this.unviewedPosts = [];
  this.cardTpl = null;
+ this.originalTitle = "";
 
  //Private functions
  var $this = this;
- 
- 
- var linking = function (tweet) {
-   var twit = tweet.replace(/(https?:\/\/([-\w\.]+)+(:\d+)?(\/([\w\/_\.]*(\?\S+)?)?)?)/ig,'<a href="$1" target="_blank" title="Visit this link">$1</a>')
-        .replace(/#([a-zA-Z0-9_]+)/g,'<a href="https://twitter.com/search?q=%23$1&amp;src=hash" target="_blank" title="Search for #$1">#$1</a>')
-        .replace(/@([a-zA-Z0-9_]+)/g,'<a href="https://twitter.com/$1" target="_blank" title="$1 on Twitter">@$1</a>');
 
-   return twit;
+
+ var linking = function (tweet) {
+  var twit = tweet.replace(/(https?:\/\/([-\w\.]+)+(:\d+)?(\/([\w\/_\.]*(\?\S+)?)?)?)/ig, '<a href="$1" target="_blank" title="Visit this link">$1</a>')
+   .replace(/#([a-zA-Z0-9_]+)/g, '<a href="https://twitter.com/search?q=%23$1&amp;src=hash" target="_blank" title="Search for #$1">#$1</a>')
+   .replace(/@([a-zA-Z0-9_]+)/g, '<a href="https://twitter.com/$1" target="_blank" title="$1 on Twitter">@$1</a>');
+
+  return twit;
  }
- 
- 
+
+
  var render_realtime_card = function (data) {
   if ($(".card[data-id='" + data.id + "']").length > 0) {
    //If the card already exists ignore it
@@ -37,8 +38,7 @@ var App = function (host, port, type) {
   }
   var rendered = Mustache.render($this.cardTpl, parse_post(data));
   $("#stream").append(rendered);
-  $("#new_posts_counter").html($this.unviewedPosts.length);
-
+  set_new_posts_counter();
  }
 
 
@@ -62,7 +62,7 @@ var App = function (host, port, type) {
  var parse_post = function (post) {
   var parsed_post = {
    "title": "",
-    "body": twttr.txt.autoLink(post.title),
+   "body": twttr.txt.autoLink(post.title),
    "img": post.medias ? post.medias[0] : "",
    "id": post.id,
    "source": post.service_uri,
@@ -126,9 +126,21 @@ var App = function (host, port, type) {
   return false;
  }
 
+ function set_new_posts_counter() {
+  var len = $this.unviewedPosts.length;
+  $("#new_posts_counter").html(len);
+  set_title(len);
+ }
+
+ function set_title(post_number) {
+  document.title = $this.originalTitle + "(" + post_number + ")";
+ }
+
  this.init = function (posts, index, count) {
   this.index = index;
   this.count = count;
+
+  this.originalTitle = document.title;
 
   $(document).ready(function () {
    $.get("/views/card.tpl.html", function (tpl) {
@@ -152,7 +164,7 @@ var App = function (host, port, type) {
      var post = JSON.parse(message);
 
      $this.unviewedPosts.push(post);
-     $("#new_posts_counter").html($this.unviewedPosts.length);
+     set_new_posts_counter();
     });
    });
 
