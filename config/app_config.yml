@@ -10,7 +10,7 @@ app:
     host: "localhost"
     socket_port: 4456
   production:
-    port: 4457
+    port: 3700
     host: "104.46.62.121"
     socket_port: 4456
 
