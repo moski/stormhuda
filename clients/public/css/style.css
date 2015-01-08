@@ -2464,7 +2464,6 @@ footer p {
     font-size: 48px;
   }
   .navbar .brand-text {
-    display: none;
   }
   .navbar .navbar-form {
     margin-bottom: 15px;
@@ -2679,7 +2678,7 @@ footer p {
 }
 #new_posts a {
   display: block;
-  width: 40%;
+  width: 55%;
   font-size: 2em;
   text-align: center;
   background-color: #1abc9c;
@@ -2711,4 +2710,11 @@ a, a:visited {
   width:24px;
   height:24px;
   margin-left:10px;
+}
+
+.card {
+  margin : 10px !important;
+}
+.sidebar{
+  text-align: center !important;
 }
