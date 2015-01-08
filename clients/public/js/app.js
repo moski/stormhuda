@@ -99,6 +99,7 @@ var App = function (host, port, type) {
    var post = $this.unviewedPosts.shift();
    render_realtime_card(post);
   }
+  set_new_posts_counter();
   e.preventDefault();
   return false;
  }
