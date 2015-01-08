@@ -8,11 +8,11 @@ app:
   development:
     port: 4457
     host: "localhost"
-    socket_port: 4457
+    socket_port: 4456
   production:
     port: 4457
     host: "104.46.62.121"
-    socket_port: 80
+    socket_port: 4456
 
 redis_keys:
   global:
