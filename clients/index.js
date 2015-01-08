@@ -9,16 +9,22 @@ var // Defining Modules
   redis = require("redis"),
   yaml = require('yamljs');
 
-/*
+
+var config = yaml.load("../config/app_config.yml");
+
 var env = 'development';
 
 if (typeof (process.argv[2]) != 'undefined') {
-  if (typeof (config[process.argv[2]]) != 'undefined') {
+  if (typeof (config.app[process.argv[2]]) != 'undefined') {
     env = process.argv[2];
   }
-}*/
+}
 
-var config = yaml.load("../config/app_config.yml");
+app.set("env", env);
+app.set("app_config", config.app[env]);
+
+console.log("Application Enviroment : " + env);
+
 app.set("redis_config", config.redis);
 app.set("global_config", {
   "channel": config.redis_keys.global.pubsub.list,
@@ -33,6 +39,8 @@ app.set("twitter_config", {
   "type": "tweets"
 });
 
+app.set("port", config.app.port);
+
 app.set('view engine', 'ejs');
 
 app.use(express.static(__dirname + '/public')); // set the static files location /public/img will be /img for users
@@ -40,14 +48,19 @@ app.use(morgan('dev')); // log every request to the console
 app.use(bodyParser()); // pull information from html in POST
 app.use(methodOverride()); // simulate DELETE and PUT
 
+//Attach app settings to the response object ,so controllers can use what is needed
+app.use(function (req, res, next) {
+  res.appSettings = app.settings;
+  next();
+});
+
 // call the Router
 var IndexCtrl = require("./controllers/index");
 
-app.get('/', IndexCtrl.all);
-app.get('/twitter', IndexCtrl.twitter);
+app.get('/:type?/:start?/:count?/:output_type?', IndexCtrl.get);
 
 
-var io = require('socket.io').listen(app.listen(3700));
+var io = require('socket.io').listen(app.listen(app.get("app_config")['port']));
 
 var RedisListener = require("./modules/RedisListener.js");
 
@@ -59,10 +72,21 @@ var allPostsListner = new RedisListener(
 )
 allPostsListner.emitNewMessagesTo(io.sockets);
 
+//Filter : twitter posts
+var twitterPostsListner = new RedisListener(
+  app.get("redis_config"),
+  app.get("twitter_config")
+)
+twitterPostsListner.emitNewMessagesTo(io.sockets);
+
+app.set("all_posts_listner", allPostsListner);
+app.set("twitter_listner", twitterPostsListner);
+
 io.sockets.on('connection', function (socket) {
   socket.on("subscribe", function (data_type) {
     socket.join(data_type);
-    console.log("user connecting to "+data_type);
   });
 
 });
+
+module.exports = app;

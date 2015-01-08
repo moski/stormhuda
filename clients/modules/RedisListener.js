@@ -26,20 +26,22 @@ var RedisListener = function (redis_config, listener_config) {
   //io sockets object to emit messages fron specified redis channel
   this.io_sockets = null;
 
-  var client = redis.createClient();
+  var realtime_client = redis.createClient();
+  var normal_client = redis.createClient();
+
   if (this.redisConfig && this.redisConfig.db) {
-    client.select(this.redisConfig.db);
+    normal_client.select(this.redisConfig.db);
     console.log("Connecting to redis db  " + this.redisConfig.db);
   }
 
-  client.subscribe(this.channel);
+  realtime_client.subscribe(this.channel);
 
   this.emitNewMessagesTo = function (io_sockets) {
     this.io_sockets = io_sockets;
   }
 
   //Emeit messages to sockets subsribed once retrieved 
-  client.on("message", function (channel, message) {
+  realtime_client.on("message", function (channel, message) {
     if ($this.io_sockets) {
       console.log(channel, message);
       $this.io_sockets.emit('message', message);
@@ -52,7 +54,7 @@ var RedisListener = function (redis_config, listener_config) {
    **/
   this.getCounter = function (next) {
     if (this.counter) {
-      client.get(this.counter, function (err, counter) {
+      normal_client.get(this.counter, function (err, counter) {
         if (err) {
           next(err, 0);
         } else {
@@ -73,7 +75,7 @@ var RedisListener = function (redis_config, listener_config) {
     if (this.list) {
       start = start || 0;
       length = length || 10;
-      client.lrange(this.list, start, length, function (err, rows) {
+      normal_client.lrange(this.list, start, length, function (err, rows) {
         if (!err) {
           next(null, rows);
         } else {

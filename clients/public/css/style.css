@@ -1,7 +1,5 @@
-@import url('http://fonts.googleapis.com/css?family=Montez');
-@import url('http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic');
-@import url('http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic');
-@import url('http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic');
+@import url(http://fonts.googleapis.com/earlyaccess/amiri.css);
+
 
 /***************************************************
   COLOURS
@@ -47,8 +45,8 @@ body {
 ****************************************************/
 
 body {
-  font-family: 'PT Sans', Helvetica, Arial, ans-serif;
-  background: url(../img/bg.jpg) 0 0 repeat #efefef;
+  font-family: 'Amiri', tahoma;
+  background:  #efefef;
   color: #555;
 }
 a {
@@ -1220,7 +1218,7 @@ dl:after {
 }
 .card {
   margin: 0 30px 30px 0;
-  width: 250px;
+  width: 80%;
   display: block;
   float: right;
   position: relative;
@@ -1280,7 +1278,7 @@ dl:after {
 }
 .card .card-body h2 {
   margin: 0 0 3px;
-  height: 55px;
+  /*height: 55px;*/
   overflow: hidden;
   font-size: 20px;
   line-height: 1.4;
@@ -2655,6 +2653,21 @@ footer p {
     display: none;
   }
 }
+#more_posts {
+  text-align: center;
+  margin: auto 0;
+  padding: 5px;
+  width: 80%;
+}
+#more_posts a {
+  display: block;
+  width: 80%;
+  font-size: 2em;
+  text-align: center;
+  background-color: #1abc9c;
+  color: #fff;
+  margin: auto;
+}
 #new_posts {
   position: fixed;
   bottom: 0px;
@@ -2670,6 +2683,11 @@ footer p {
   font-size: 2em;
   text-align: center;
   background-color: #1abc9c;
+  margin: auto 0;
   color: #fff;
   float: right;
+}
+
+.stButton .st-twitter-counter, .stButton .st-facebook-counter{
+  height:30px !important;
 }
