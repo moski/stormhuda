@@ -9,7 +9,8 @@ require_relative 'storage/tweet'
 require_relative 'extends/tweet'
 
 # Load the twitter OAUTH creds
-twitter_config = YAML.load_file('../config/keys_config.yml')['twitter']
+twitter_config   = YAML.load_file('../config/keys_config.yml')['twitter']
+
 
 # Load app configuration such as redis information and 
 # hashtags

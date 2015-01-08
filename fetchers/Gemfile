@@ -3,3 +3,8 @@ source 'https://rubygems.org'
 gem 'twitter'
 gem 'roar'
 gem 'redis'
+
+group :instagram do
+   gem 'instagram'
+   gem 'sinatra' 
+end
