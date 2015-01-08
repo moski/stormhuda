@@ -133,7 +133,11 @@ var App = function (host, port, type) {
  }
 
  function set_title(post_number) {
-  document.title = $this.originalTitle + "(" + post_number + ")";
+  if (post_number > 0) {
+   document.title = $this.originalTitle + " (" + post_number + ") ";
+  } else {
+   document.title = $this.originalTitle;
+  }
  }
 
  this.init = function (posts, index, count) {
