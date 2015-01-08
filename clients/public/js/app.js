@@ -18,8 +18,7 @@ var App = function (host, port, type) {
   var rendered = Mustache.render($this.cardTpl, parse_post(data));
   $("#stream").prepend(rendered);
   $("#new_posts_counter").html($this.unviewedPosts.length);
-  relayout();
-
+  scrollTop();
  }
  var render_archived_card = function (data) {
   if ($(".card[data-id='" + data.id + "']").length > 0) {
@@ -32,6 +31,10 @@ var App = function (host, port, type) {
 
  }
 
+
+ function scrollTop() {
+  window.scrollTo(0, 0);
+ }
 
 
  function element_in_scroll(elem) {
