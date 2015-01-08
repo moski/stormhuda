@@ -2694,3 +2694,20 @@ footer p {
   text-align: right !important;
   margin-top: 10px !important;
 }
+
+a, a:visited {
+  color: #3f729b;
+}
+
+.card-body a.username:hover{
+  text-decoration:none;
+  font-weight:bold;
+  font-family: 'proxima-nova','Helvetica Neue',Arial,Helvetica,sans-serif;
+  text-align:left;
+}
+
+.card-body a img{
+  width:24px;
+  height:24px;
+  margin-left:10px
+}
