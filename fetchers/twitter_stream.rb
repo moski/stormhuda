@@ -39,6 +39,8 @@ client.filter(track: topics.join(",")) do |tweet|
     # only fetch tweets with images.
     if tweet.media?
       x = Storage::Tweet.new.extend(TweetRepresenter).from_json(tweet.to_json)
+      puts x.to_json
+      
       x.save!($redis)
       print '.'
     end

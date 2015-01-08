@@ -10,7 +10,8 @@ module Twitter
         "medias" => media.map(&:media_uri).map(&:to_s),
         "urls" => urls.map(&:expanded_uri).map(&:to_s),
         "service_uri" => url.to_s,
-        #"created_at" => created_at.to_i
+        "created_at" => created_at.to_i,
+        "username" => user.name,
         "type" => 'tweet'
       }
     end

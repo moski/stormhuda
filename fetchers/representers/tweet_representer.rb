@@ -10,4 +10,5 @@ module TweetRepresenter
   property :service_uri
   property :type
   property :created_at
+  property :username
 end
