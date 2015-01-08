@@ -4,7 +4,6 @@ var IndexCtrl = {
       output_type = "html",
       start = 0,
       count = 20;
-    console.log(req.params);
     if (req.params.type) {
       type = req.params.type;
     }

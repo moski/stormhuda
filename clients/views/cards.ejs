@@ -55,7 +55,7 @@
             </a>
           </div>
         </div>
-        <div class="portfolio-wrapper" id="cards">
+        <div class="portfolio-wrapper" id="stream">
 
         </div>
          <div class="row">
@@ -78,8 +78,11 @@
   <script src="/js/isotope.pkgd.min.js"></script>
   <script src="/js/app.js"></script>
   <script type="text/javascript">
+
     var app = new App( '<%= host %>' , <%= port %> , '<%=type %>');
     app.init(<%-JSON.stringify(posts);%> , <%= pageIndex %> , <%= itemsCount %>);
+
+   
   </script>
 
 </body>

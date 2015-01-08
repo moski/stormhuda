@@ -82,6 +82,7 @@ twitterPostsListner.emitNewMessagesTo(io.sockets);
 app.set("all_posts_listner", allPostsListner);
 app.set("twitter_listner", twitterPostsListner);
 
+
 io.sockets.on('connection', function (socket) {
   socket.on("subscribe", function (data_type) {
     socket.join(data_type);
@@ -89,4 +90,3 @@ io.sockets.on('connection', function (socket) {
 
 });
 
-module.exports = app;
