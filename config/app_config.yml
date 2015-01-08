@@ -11,7 +11,7 @@ app:
     socket_port: 4456
   production:
     port: 3700
-    host: "104.46.62.121"
+    host: "snowjo.today"
     socket_port: 4456
 
 redis_keys:
