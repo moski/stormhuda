@@ -7,4 +7,5 @@ gem 'redis'
 group :instagram do
    gem 'instagram'
    gem 'sinatra' 
+   gem 'unicorn'
 end
