@@ -11,7 +11,7 @@ module Twitter
         "urls" => urls.map(&:expanded_uri).map(&:to_s),
         "service_uri" => url.to_s,
         "created_at" => created_at.to_i,
-        "username" => user.name,
+        "username" => user.screen_name,
         "type" => 'tweet'
       }
     end
