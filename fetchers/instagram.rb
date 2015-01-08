@@ -9,6 +9,10 @@ require_relative 'storage/base'
 
 instagram_config = YAML.load_file('../config/keys_config.yml')['instagram']
 
+# Load app configuration such as redis information and 
+# hashtags
+app_config = YAML.load_file('../config/app_config.yml')
+
 
 Instagram.configure do |config|
   config.client_id = instagram_config["client_id"]
