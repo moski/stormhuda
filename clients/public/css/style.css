@@ -49,10 +49,10 @@ body {
   color: #555;
 }
 a {
-  color: #1abc9c;
+  color: #3f729b;
 }
 a:hover {
-  color: #16a085;
+  color: #3f729b;
 }
 h1,
 h2,
@@ -2699,7 +2699,7 @@ a, a:visited {
   color: #3f729b;
 }
 
-.card-body a.username:hover{
+.card-body a.username, .card-body a.username:hover{
   text-decoration:none;
   font-weight:bold;
   font-family: 'proxima-nova','Helvetica Neue',Arial,Helvetica,sans-serif;
@@ -2709,5 +2709,5 @@ a, a:visited {
 .card-body a img{
   width:24px;
   height:24px;
-  margin-left:10px
+  margin-left:10px;
 }
