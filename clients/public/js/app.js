@@ -80,20 +80,7 @@ var App = function (host, port, type) {
   return res;
  }
 
- var render_new_posts = function (posts, append) {
-  console.log("rendering new_posts: ", posts.length);
-  var len = posts.length;
-  for (var i = 0; i < len; i++) {
-   var post = posts.shift();
-   var rendered = Mustache.render($this.cardTpl, post);
-   if (append) {
-    $("#stream").append(rendered);
-   } else {
-    $("#stream").prepend(rendered);
-   }
 
-  }
- }
 
  var show_new = function (e) {
   var len = $this.unviewedPosts.length;
@@ -145,15 +132,8 @@ var App = function (host, port, type) {
 
     socket.on('message', function (message) {
      var post = JSON.parse(message);
-     var post_unified = {
-      "title": "",
-      "body": post.title,
-      "img": post.medias[0],
-      "id": post.id,
-      "source": post.service_uri,
-      "type": post.type
-     }
-     $this.unviewedPosts.push(post_unified);
+
+     $this.unviewedPosts.push(post);
      $("#new_posts_counter").html($this.unviewedPosts.length);
     });
    });
