@@ -1,10 +1,14 @@
 source 'https://rubygems.org'
 
-gem 'twitter'
 gem 'roar'
 gem 'redis'
+
+group :twtter do
+  gem 'twitter'
+end
 
 group :instagram do
    gem 'instagram'
    gem 'sinatra' 
+   gem 'unicorn'
 end
