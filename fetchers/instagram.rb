@@ -51,16 +51,9 @@ end
 post '/process_subscription/*' do
   Instagram.process_subscription(request.body) do |handler|
     handler.on_tag_changed do |tag,payload|
-      puts tag
-      puts payload
       data = Instagram.tag_recent_media(URI.escape(tag), count: 1).first
-      if (data['type'] != 'video')
-        media = Storage::Insta.new.extend(InstagramRepresenter).from_hash(data.to_hash)
-        puts media.to_json
-        media.save!($redis)
-      else
-        "ignore video"
-      end
+      media = Storage::Insta.new.extend(InstagramRepresenter).from_hash(data.to_hash)
+      media.save!($redis)
     end
   end
   :ok
