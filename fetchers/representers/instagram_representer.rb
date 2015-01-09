@@ -19,7 +19,8 @@ module InstagramRepresenter
       urls: [], 
       link: self.service_uri,
       username: self.user['username'],
-      created_at: self.created_at
+      created_at: self.created_at,
+      type: 'insta_image'
     }.to_json
   end
 end

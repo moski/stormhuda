@@ -45,12 +45,17 @@ var IndexCtrl = {
 var get_posts_by_type = function (res, type, index, count, next) {
   var listenr;
 
+    console.log(type)
+
   switch (type) {
   case 'all':
     listenr = res.appSettings['all_posts_listner'];
     break;
   case 'twitter':
     listenr = res.appSettings['twitter_listner'];
+    break;
+  case 'instagram':
+    listenr = res.appSettings['instagram_listner'];
     break;
   }
 

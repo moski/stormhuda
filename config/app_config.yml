@@ -27,6 +27,12 @@ redis_keys:
     pubsub:
       list: 'pubsub_tweets_list'
       counter: 'pubsub_tweets_counter'
+  instagram:
+    key: 'instagram_list'
+    counter: 'instagram_counter'
+    pubsub:
+      list: 'pubsub_instagram_list'
+      counter: 'pubsub_instagram_counter'
     #max_count: 99
   pubsub:
     channel: 'realtime'

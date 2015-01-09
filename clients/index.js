@@ -35,8 +35,15 @@ app.set("global_config", {
 app.set("twitter_config", {
   "channel": config.redis_keys.tweets.pubsub.list,
   "counter": config.redis_keys.tweets.pubsub.counter,
-  "list": config.redis_keys.global.key,
+  "list": config.redis_keys.twitter.key,
   "type": "tweets"
+});
+
+app.set("instagram_config", {
+  "channel": config.redis_keys.instagram.pubsub.list,
+  "counter": config.redis_keys.instagram.pubsub.counter,
+  "list": config.redis_keys.instagram.key,
+  "type": "instagram"
 });
 
 
@@ -79,10 +86,18 @@ var twitterPostsListner = new RedisListener(
   app.get("redis_config"),
   app.get("twitter_config")
 )
+
+var instagramPostsListner = new RedisListener(
+  app.get("redis_config"),
+  app.get("instagram_config")
+)
+
 twitterPostsListner.emitNewMessagesTo(io.sockets);
+instagramPostsListner.emitNewMessagesTo(io.sockets);
 
 app.set("all_posts_listner", allPostsListner);
 app.set("twitter_listner", twitterPostsListner);
+app.set("instagram_listner", instagramPostsListner);
 
 
 io.sockets.on('connection', function (socket) {
@@ -91,7 +106,3 @@ io.sockets.on('connection', function (socket) {
   });
 
 });
-
-
-
-
