@@ -175,7 +175,7 @@ var App = function (host, port, type) {
     var t2 = $.get("/views/card_instagram_image.tpl.html", function(tpl){$this.cardTplInstagramImage = tpl;});
     var t3 = $.get("/views/card_instagram_video.tpl.html", function(tpl){$this.cardTplInstagramVideo = tpl;});
    
-   $.when(t1, t2).done(function(){
+   $.when(t1, t2, t3).done(function(){
 
     //$this.cardTpl = tpl;
 
