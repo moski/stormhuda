@@ -7,7 +7,6 @@ var App = function (host, port, type) {
  this.unviewedPosts = [];
  this.cardTpl = null;
  this.cardTplInstagramImage = null;
- this.cardTplInstagramVideo = null;
  this.originalTitle = "";
 
  //Private functions
@@ -32,11 +31,9 @@ var App = function (host, port, type) {
   var parsed_data = parse_post(data);
   var rendered = Mustache.render(get_template(parsed_data), parsed_data);
   $("#stream").prepend(rendered);
-  sublimevideo.load();
   $("#new_posts_counter").html($this.unviewedPosts.length);
   scrollTop();
  }
- 
  var render_archived_card = function (data) {
   if ($(".card[data-id='" + data.id + "']").length > 0) {
    //If the card already exists ignore it
@@ -47,17 +44,13 @@ var App = function (host, port, type) {
   
   var rendered = Mustache.render(get_template(parsed_data), parsed_data);
   $("#stream").append(rendered);
-  sublimevideo.load();
   set_new_posts_counter();
  }
 
  function get_template(post){
    if(post.type == 'insta_image'){
      return $this.cardTplInstagramImage;
-   }else if (post.type == 'insta_video'){
-     return $this.cardTplInstagramVideo;     
-   } 
-   else{
+   }else{
      return $this.cardTpl;
    }
  }
@@ -85,7 +78,6 @@ var App = function (host, port, type) {
    "title": "",
    "body": twttr.txt.autoLink(post.title),
    "img": post.medias ? post.medias[0] : "",
-   "vid": post.videos ? post.videos[0] : "",
    "id": post.id,
    "source": post.service_uri,
    "type": post.type,
@@ -103,7 +95,6 @@ var App = function (host, port, type) {
     "title": "",
     "body": posts[i].title,
     "img": posts[i].medias[0],
-    "vid": post[i].medias[0], 
     "id": posts[i].id,
     "source": posts[i].service_uri,
     "type": posts[i].type,
@@ -174,10 +165,9 @@ var App = function (host, port, type) {
    
     var t1 = $.get("/views/card.tpl.html", function(tpl){$this.cardTpl = tpl;});
     var t2 = $.get("/views/card_instagram_image.tpl.html", function(tpl){$this.cardTplInstagramImage = tpl;});
-    var t3 = $.get("/views/card_instagram_video.tpl.html", function(tpl){$this.cardTplInstagramVideo = tpl;});
    
    
-   $.when(t1, t2, t3).done(function(){
+   $.when(t1, t2).done(function(){
 
     //$this.cardTpl = tpl;
 
