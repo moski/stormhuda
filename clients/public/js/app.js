@@ -161,8 +161,8 @@ var App = function (host, port, type) {
 
   $(document).ready(function () {
    
-    var t1 = $.get("/views/card.tpl.html", function(tpl){$this.cardTpl = tpl;}
-    var t2 = $.get("/views/card_instagram_image.tpl.html", function (tpl) {$this.cardTplInstagramImage = tpl;}
+    var t1 = $.get("/views/card.tpl.html", function(tpl){$this.cardTpl = tpl;});
+    var t2 = $.get("/views/card_instagram_image.tpl.html", function(tpl){$this.cardTplInstagramImage = tpl;});
    
    
    $.when(t1, t2).done(function(){
