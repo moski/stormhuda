@@ -6,6 +6,7 @@ var App = function (host, port, type) {
  this.count = 20;
  this.unviewedPosts = [];
  this.cardTpl = null;
+ this.cardTplInstagramImage = null;
  this.originalTitle = "";
 
  //Private functions
@@ -36,9 +37,20 @@ var App = function (host, port, type) {
    //If the card already exists ignore it
    return;
   }
-  var rendered = Mustache.render($this.cardTpl, parse_post(data));
+  
+  var parsed_data = parse_post(data);
+  
+  var rendered = Mustache.render(get_template(parsed_data), parsed_data);
   $("#stream").append(rendered);
   set_new_posts_counter();
+ }
+
+ function get_template(post){
+   if(post.type == 'insta_image'){
+     return $this.cardTplInstagramImage;
+   }else{
+     return $this.cardTpl;
+   }
  }
 
 
@@ -99,7 +111,6 @@ var App = function (host, port, type) {
    var post = $this.unviewedPosts.shift();
    render_realtime_card(post);
   }
-  set_new_posts_counter();
   e.preventDefault();
   return false;
  }
@@ -141,6 +152,17 @@ var App = function (host, port, type) {
   }
  }
 
+ function get_templates(){
+   $.get("/views/card.tpl.html", function (tpl) {
+     $this.cardTpl = tpl;
+     $.get("/views/card.tpl.html", function (tpl) {
+       $this.cardTplInstagramImage = tpl;
+     }
+   }
+ }
+
+
+
  this.init = function (posts, index, count) {
   this.index = index;
   this.count = count;
@@ -148,9 +170,14 @@ var App = function (host, port, type) {
   this.originalTitle = document.title;
 
   $(document).ready(function () {
-   $.get("/views/card.tpl.html", function (tpl) {
+   
+    var t1 = $.get("/views/card.tpl.html", function(tpl){$this.cardTpl = tpl;}
+    var t2 = $.get("/views/card_instagram_image.tpl.html", function (tpl) {$this.cardTplInstagramImage = tpl;}
+   
+   
+   $.when(t1, t2).done(function(){
 
-    $this.cardTpl = tpl;
+    //$this.cardTpl = tpl;
 
     //Render preloaded data
     if (posts) {
