@@ -17,7 +17,7 @@ module InstagramRepresenter
       id: self.id, 
       medias: self.images, 
       urls: [], 
-      link: self.service_uri,
+      service_uri: self.service_uri,
       username: self.user['username'],
       created_at: self.created_at,
       type: 'insta_image'
