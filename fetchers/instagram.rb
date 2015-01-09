@@ -37,6 +37,13 @@ else
 end
 =end
 
+# Create and connect a redis client.
+$redis = Redis.new(
+  host: app_config["redis"]["host"], 
+  port: app_config["redis"]["port"], 
+  db: app_config["redis"]["db"])
+
+
 get "/process_subscription/" do
   puts params["hub.challenge"] if params["hub.challenge"]
 end
@@ -50,6 +57,7 @@ post '/process_subscription/*' do
       if (data['type'] != 'video')
         media = Storage::Insta.new.extend(InstagramRepresenter).from_hash(data.to_hash)
         puts media.to_json
+        media.save!($redis)
       else
         "ignore video"
       end
