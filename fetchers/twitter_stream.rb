@@ -2,6 +2,7 @@ require 'bundler/setup'
 Bundler.require(:default)
 Bundler.require(:twitter)
 require 'yaml'
+require 'twitter'
 
 require_relative 'representers/tweet_representer'
 
