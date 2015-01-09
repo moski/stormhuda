@@ -192,7 +192,7 @@ var App = function (host, port, type) {
     });
    });
 
-   $("#show_new").click(show_new);
+   $("#new_posts").click(show_new);
    $("#show_more").click(show_more);
 
 

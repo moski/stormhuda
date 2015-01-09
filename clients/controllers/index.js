@@ -12,7 +12,7 @@ var IndexCtrl = {
     }
     if (req.params.count) {
       count = Math.abs(req.params.count);
-      if(count > 100){
+      if (count > 100) {
         count = 20;
       }
     }
@@ -33,9 +33,9 @@ var IndexCtrl = {
           type: type,
           port: res.appSettings['app_config']['socket_port'],
           posts: parsed_posts,
-          pageIndex : start,
-          itemsCount : count,
-          env : res.appSettings['evn']
+          pageIndex: start,
+          itemsCount: count,
+          env: res.appSettings['evn']
         });
       }
     });
@@ -45,17 +45,17 @@ var IndexCtrl = {
 var get_posts_by_type = function (res, type, index, count, next) {
   var listenr;
 
-    console.log(type)
+  console.log(type)
 
   switch (type) {
-  case 'all':
-    listenr = res.appSettings['all_posts_listner'];
-    break;
-  case 'twitter':
+  case 'tweets':
     listenr = res.appSettings['twitter_listner'];
     break;
   case 'instagram':
     listenr = res.appSettings['instagram_listner'];
+    break;
+  default:
+    listenr = res.appSettings['all_posts_listner'];
     break;
   }
 

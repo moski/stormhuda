@@ -50,7 +50,7 @@ body {
 }
 a {
   color: #3f729b;
-  font-family: 'proxima-nova','Helvetica Neue',Arial,Helvetica,sans-serif;
+  font-family: 'proxima-nova', 'Helvetica Neue', Arial, Helvetica, sans-serif;
 }
 a:hover {
   color: #3f729b;
@@ -1275,7 +1275,7 @@ dl:after {
 }
 .card .card-body {
   padding: 10px 15px 15px;
-  overflow:hidden;
+  overflow: hidden;
 }
 .card .card-body h2 {
   margin: 0 0 3px;
@@ -2464,9 +2464,7 @@ footer p {
   .navbar .navbar-brand {
     font-size: 48px;
   }
-  .navbar .brand-text {
-  }
-  .navbar .navbar-form {
+  .navbar .brand-text {} .navbar .navbar-form {
     margin-bottom: 15px;
     margin-left: auto;
     margin-right: auto;
@@ -2669,13 +2667,20 @@ footer p {
   margin: auto;
 }
 #new_posts {
-  position: fixed;
-  bottom: 0px;
-  z-index: 99;
   background-color: rgba(234, 224, 224, 0.5);
   text-align: center;
   margin: auto 0;
   padding: 5px;
+  float: left;
+  cursor: pointer;
+}
+#new_posts sup {
+  border-radius: 13%;
+  padding: 5px;
+  background: #D21E1E;
+  color: #fff;
+  font-size: 15px;
+  top: -1.5em;
 }
 #new_posts a {
   display: block;
@@ -2695,27 +2700,60 @@ footer p {
   text-align: right !important;
   margin-top: 10px !important;
 }
-
-a, a:visited {
+a,
+a:visited {
   color: #3f729b;
 }
-
-.card-body a.username, .card-body a.username:hover{
-  text-decoration:none;
-  font-weight:bold;
-  font-family: 'proxima-nova','Helvetica Neue',Arial,Helvetica,sans-serif;
-  text-align:left;
+.card-body a.username,
+.card-body a.username:hover {
+  text-decoration: none;
+  font-weight: bold;
+  font-family: 'proxima-nova', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  text-align: left;
 }
-
-.card-body a img{
-  width:24px;
-  height:24px;
-  margin-left:10px;
+.card-body a img {
+  width: 24px;
+  height: 24px;
+  margin-left: 10px;
 }
-
 .card {
-  margin : 10px !important;
+  margin: 10px !important;
 }
-.sidebar{
+.sidebar {
   text-align: center !important;
+}
+.footer {
+  background-color: rgba(236, 236, 236, 0.9);
+  bottom: 0px;
+  height: 40px;
+  position: fixed;
+  width: 100%;
+  border-top: 1px solid #333;
+  z-index: 999;
+}
+ul.filters {
+  float: right;
+  font-size: 17px;
+}
+.filters li {
+  list-style: none;
+  margin-right: 5px;
+  padding: 5px;
+  text-align: center;
+  display: inline-block;
+  width: 90px;
+}
+.filters li a{
+   color: #333;
+}
+.filters li.active a {
+  color: #fff;
+}
+.filters li.active {
+  background-color: #333;
+  color: #fff;
+}
+.filters li a {
+  display: block;
+  text-transform: none;
 }
