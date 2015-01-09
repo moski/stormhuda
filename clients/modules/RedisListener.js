@@ -43,8 +43,8 @@ var RedisListener = function (redis_config, listener_config) {
   //Emeit messages to sockets subsribed once retrieved 
   realtime_client.on("message", function (channel, message) {
     if ($this.io_sockets) {
-      console.log(channel, message);
-      $this.io_sockets.emit('message', message);
+      console.log($this.type, message);
+      $this.io_sockets.in($this.type).emit('message', message);
     }
   });
 

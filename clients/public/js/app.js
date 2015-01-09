@@ -162,7 +162,7 @@ var App = function (host, port, type) {
     }
     var socket = io.connect('http://' + $this.host + ':' + $this.port);
     socket.on('connect', function () {
-     socket.emit('subscribe', this.type);
+     socket.emit('subscribe', $this.type);
     });
 
     socket.on('message', function (message) {
