@@ -152,16 +152,6 @@ var App = function (host, port, type) {
   }
  }
 
- function get_templates(){
-   $.get("/views/card.tpl.html", function (tpl) {
-     $this.cardTpl = tpl;
-     $.get("/views/card.tpl.html", function (tpl) {
-       $this.cardTplInstagramImage = tpl;
-     }
-   }
- }
-
-
 
  this.init = function (posts, index, count) {
   this.index = index;
