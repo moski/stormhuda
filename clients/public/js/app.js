@@ -27,7 +27,9 @@ var App = function (host, port, type) {
    //If the card already exists ignore it
    return;
   }
-  var rendered = Mustache.render($this.cardTpl, parse_post(data));
+  
+  var parsed_data = parse_post(data);
+  var rendered = Mustache.render(get_template(parsed_data), parsed_data);
   $("#stream").prepend(rendered);
   $("#new_posts_counter").html($this.unviewedPosts.length);
   scrollTop();
