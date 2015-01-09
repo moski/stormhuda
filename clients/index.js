@@ -35,7 +35,7 @@ app.set("global_config", {
 app.set("twitter_config", {
   "channel": config.redis_keys.tweets.pubsub.list,
   "counter": config.redis_keys.tweets.pubsub.counter,
-  "list": config.redis_keys.twitter.key,
+  "list": config.redis_keys.tweets.key,
   "type": "tweets"
 });
 
